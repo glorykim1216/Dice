@@ -11,6 +11,8 @@ public class UIManager : MonoSingleton<UIManager>
     // Start is called before the first frame update
     void Start()
     {
+        Screen.SetResolution(720, 1280, true);
+
         startBtn.onClick.AddListener(() => { GameManager.Instance.GameStart(); });
         resetBtn.onClick.AddListener(() => { GameManager.Instance.GameReset(); });
     }

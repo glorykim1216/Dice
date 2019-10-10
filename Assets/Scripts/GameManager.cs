@@ -8,10 +8,9 @@ public class GameManager : MonoSingleton<GameManager>
     public Transform[] dices;
 
     private Vector3[] resetPos = {
-        new Vector3(-3.5f, 21.7f, 23.5f),
-        new Vector3(-1.2f, 21.7f, 23.5f),
-        new Vector3(1.2f, 21.7f, 23.5f),
-        new Vector3(3.5f, 21.7f, 23.5f)
+        new Vector3(-3.5f, 22.01f, 23.53f),
+        new Vector3(0f, 22.01f, 23.53f),
+        new Vector3(3.14f, 22.01f, 23.53f)
     };
 
     int[] num = new int[4];
@@ -42,7 +41,8 @@ public class GameManager : MonoSingleton<GameManager>
             {
                 int randomX = Random.Range(0, 4);
                 int randomY = Random.Range(0, 4);
-                dices[i].position = resetPos[i];
+                int posX = Random.Range(-1, 3);
+                dices[i].position = resetPos[i] + new Vector3((float)posX * 0.1f, 0, 0); ;
                 dices[i].rotation = Quaternion.Euler(new Vector3(randomX * 90 + 30, 0, randomY * 90));
                 dices[i].GetComponent<Rigidbody>().isKinematic = true;
             }
@@ -71,13 +71,14 @@ public class GameManager : MonoSingleton<GameManager>
 
         while (true)
         {
-            int stopDice;
+            int stopDice = 1;
             for (int i = 0; i < count; i++)
             {
                 if (rigid[i].velocity == Vector3.zero)
                     velocityZero[i] = 1;
+
+                stopDice *= velocityZero[i];
             }
-            stopDice = velocityZero[0] * velocityZero[1] * velocityZero[2] * velocityZero[3];
             if (stopDice == 1)
             {
                 for (int i = 0; i < dices.Length; i++)

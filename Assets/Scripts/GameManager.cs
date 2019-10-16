@@ -13,7 +13,7 @@ public class GameManager : MonoSingleton<GameManager>
         new Vector3(3.14f, 22.01f, 23.53f)
     };
 
-    int[] num = new int[4];
+    int[] num = new int[3];
     bool isGaming = false;
     bool isReady = true;
     void Start()

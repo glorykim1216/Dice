@@ -15,6 +15,24 @@ public class UIManager : MonoSingleton<UIManager>
 
         startBtn.onClick.AddListener(() => { GameManager.Instance.GameStart(); });
         resetBtn.onClick.AddListener(() => { GameManager.Instance.GameReset(); });
+
+        // ex
+        numBtn[0].onClick.AddListener(() => 
+        {
+            GameObject objUI = UITools.Instance.ShowUI(eUIType.PF_UI_BETS);
+            UIBets popup = objUI.GetComponent<UIBets>();
+            popup.Init(
+                () =>
+                {
+                    Debug.Log("OK");
+                },
+                () =>
+                {
+                },
+                "",
+                ""
+                );
+        });
     }
 
     public void StarInit()
@@ -29,6 +47,5 @@ public class UIManager : MonoSingleton<UIManager>
         numBtn[_num[0]].transform.Find("Star").gameObject.SetActive(true);
         numBtn[_num[1]].transform.Find("Star").gameObject.SetActive(true);
         numBtn[_num[2]].transform.Find("Star").gameObject.SetActive(true);
-        numBtn[_num[3]].transform.Find("Star").gameObject.SetActive(true);
     }
 }

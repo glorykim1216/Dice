@@ -64,7 +64,7 @@ public class GameManager : MonoSingleton<GameManager>
         float angle = 0;
         while (angle < 110)
         {
-            angle += 4f;
+            angle += 8f;
             trigger.eulerAngles = new Vector3(angle, 0, 0);
             yield return null;
         }

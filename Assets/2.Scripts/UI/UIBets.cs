@@ -66,11 +66,10 @@ public class UIBets : MonoBehaviour
     {
         if (Yes != null)
         {
-            Yes();
-            UITools.Instance.HideUI(eUIType.PF_UI_BETS);
             GlobalManager.Instance.gold -= betGold;     // - 값 예외 처리 필요
             Debug.Log(GlobalManager.Instance.gold);
             ButtonOK.onClick.RemoveAllListeners();
+            Yes();
         }
     }
 

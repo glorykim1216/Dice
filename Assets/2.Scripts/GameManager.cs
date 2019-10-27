@@ -94,5 +94,9 @@ public class GameManager : MonoSingleton<GameManager>
             yield return null;
 
         }
+
+        yield return new WaitForSeconds(1);
+        //UIManager.Instance.GetBetTablePopup()
+
     }
 }

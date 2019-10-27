@@ -1205,7 +1205,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 90}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7301780700774555944
@@ -1260,6 +1260,7 @@ MonoBehaviour:
   ButtonOK: {fileID: 7301780701282401485}
   titleText: {fileID: 7301780699917800149}
   goldText: {fileID: 7301780700447457360}
+  betGold: 0
   slider: {fileID: 7301780700407169691}
 --- !u!1 &7301780701078737931
 GameObject:

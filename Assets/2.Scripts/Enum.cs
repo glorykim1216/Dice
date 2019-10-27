@@ -14,6 +14,7 @@ public enum eScene
 public enum eUIType         // UI 프리펩
 {
     PF_UI_BETS,
+    PF_UI_BET_TABLE,
     PF_UI_OPTION,
     PF_UI_RESULT,
     PF_UI_COMMAND,

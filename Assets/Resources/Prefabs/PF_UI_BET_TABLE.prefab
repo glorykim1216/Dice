@@ -130,10 +130,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 684eb5f320b35aa45bff2d58b1422fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonOK: {fileID: 0}
-  betText: []
-  xText: []
-  winText: []
+  ButtonOK: {fileID: 7603912828692120308}
+  betText:
+  - {fileID: 4801522058650207853}
+  - {fileID: 4801522057579431933}
+  - {fileID: 4801522058532004395}
+  - {fileID: 4801522058160248154}
+  - {fileID: 4801522057965296616}
+  - {fileID: 4801522058167241927}
+  xText:
+  - {fileID: 4801522056995570437}
+  - {fileID: 4801522057884807925}
+  - {fileID: 4801522056798560843}
+  - {fileID: 4801522057951575950}
+  - {fileID: 4801522058848171300}
+  - {fileID: 4801522058826213470}
+  winText:
+  - {fileID: 4801522057144538893}
+  - {fileID: 4801522057051075744}
+  - {fileID: 4801522057531628574}
+  - {fileID: 4801522058221284448}
+  - {fileID: 4801522058067048266}
+  - {fileID: 4801522056845079219}
 --- !u!1 &4801522056798560844
 GameObject:
   m_ObjectHideFlags: 0

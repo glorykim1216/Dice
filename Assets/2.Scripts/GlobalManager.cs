@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class GlobalManager : MonoSingleton<GlobalManager>
 {
-    public float gold = 10000;
- 
+    public int gold = 10000;
+    public int[] betGold = new int[6];
 }

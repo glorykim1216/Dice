@@ -23,3 +23,13 @@ public enum eUIType         // UI 프리펩
 
     MAX
 }
+
+public enum eDiceNum
+{
+    ONE = 0,
+    TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    SIX
+}

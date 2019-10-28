@@ -41,17 +41,20 @@ public class UIBets : MonoBehaviour
     public Button ButtonOK;
     public Text titleText;
     public Text goldText;
-    public float betGold;
+    public int betGold;
     public Slider slider;
 
-    public void Init(YesEvent _yes, string _title, Color32 _color)
+    eDiceNum num;
+
+    public void Init(YesEvent _yes, eDiceNum _num, Color32 _color)
     {
         // 이벤트 전달
         Yes = _yes;
 
         ButtonOK.onClick.AddListener(() => { BtnOK(); });
 
-        titleText.text = _title;
+        num = _num;
+        titleText.text = _num.ToString();
         titleText.color = _color;
         slider.value = 0;
 
@@ -59,7 +62,7 @@ public class UIBets : MonoBehaviour
     }
     void valueChanged()
     {
-        betGold = Mathf.Floor(slider.value * GlobalManager.Instance.gold);
+        betGold = (int)(slider.value * GlobalManager.Instance.gold);
         goldText.text = betGold.ToString();
     }
     public void BtnOK()
@@ -67,6 +70,7 @@ public class UIBets : MonoBehaviour
         if (Yes != null)
         {
             GlobalManager.Instance.gold -= betGold;     // - 값 예외 처리 필요
+            GlobalManager.Instance.betGold[(int)num] = betGold;
             Debug.Log(GlobalManager.Instance.gold);
             ButtonOK.onClick.RemoveAllListeners();
             Yes();

@@ -95,8 +95,13 @@ public class GameManager : MonoSingleton<GameManager>
 
         }
 
+        int[] _x = new int[6];  // 당첨 숫자
+        for(int i=0;i<num.Length;i++)
+        {
+            _x[num[i]]++;
+        }
         yield return new WaitForSeconds(1);
-        //UIManager.Instance.GetBetTablePopup()
+        UIManager.Instance.GetBetTablePopup(GlobalManager.Instance.betGold, _x);
 
     }
 }

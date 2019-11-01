@@ -14,9 +14,9 @@ public class UIBetTable : MonoBehaviour
     public Text[] xText;
     public Text[] winText;
 
-    int prizeGold; // 상금
+    float prizeGold; // 상금
 
-    public void Init(YesEvent _yes, int[] _bet, int[] _x)
+    public void Init(YesEvent _yes, float[] _bet, int[] _x)
     {
         // 이벤트 전달
         Yes = _yes;
@@ -25,24 +25,24 @@ public class UIBetTable : MonoBehaviour
 
         for (int i = 0; i < _bet.Length; i++)
         {
-            betText[i].text = _bet[i].ToString();
+            betText[i].text = GlobalManager.Instance.GetGold2Unit(_bet[i]);
             xText[i].text = _x[i].ToString();
 
             if (_x[i] == 0)
             {
-                winText[i].text = (_bet[i] * -1).ToString();
+                winText[i].text = GlobalManager.Instance.GetGold2Unit(_bet[i] * -1);
             }
             else if (_x[i] == 1)
             {
-                int win = _bet[i] * 2;
+                float win = _bet[i] * 2;
                 prizeGold += win;
-                winText[i].text = win.ToString();
+                winText[i].text = GlobalManager.Instance.GetGold2Unit(win);
             }
             else if(_x[i] == 2)
             {
-                int win = _bet[i] * 3;
+                float win = _bet[i] * 3;
                 prizeGold += win;
-                winText[i].text = win.ToString();
+                winText[i].text = GlobalManager.Instance.GetGold2Unit(win);
             }
         }
     }
@@ -51,9 +51,14 @@ public class UIBetTable : MonoBehaviour
     {
         if (Yes != null)
         {
-            GlobalManager.Instance.gold += prizeGold;    
+            GlobalManager.Instance.betGold = new float[6];
+
+            GlobalManager.Instance.gold += prizeGold;
+            UIManager.Instance.ShowGold(GlobalManager.Instance.gold);
             Debug.Log(GlobalManager.Instance.gold);
             ButtonOK.onClick.RemoveAllListeners();
+
+
             Yes();
         }
     }

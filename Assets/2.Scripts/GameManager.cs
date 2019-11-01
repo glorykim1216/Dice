@@ -14,11 +14,12 @@ public class GameManager : MonoSingleton<GameManager>
     };
 
     int[] num = new int[3];
-    bool isGaming = false;
+    public bool isGaming = false;
     bool isReady = true;
     void Start()
     {
         GameReset();
+        UIManager.Instance.ShowGold(GlobalManager.Instance.gold);
     }
 
     public void GameStart()
@@ -46,8 +47,16 @@ public class GameManager : MonoSingleton<GameManager>
                 dices[i].rotation = Quaternion.Euler(new Vector3(randomX * 90 + 30, 0, randomY * 90));
                 dices[i].GetComponent<Rigidbody>().isKinematic = true;
             }
-            UIManager.Instance.StarInit();
+            float[] tempBetGold = GlobalManager.Instance.betGold;
+            for (int i = 0; i < tempBetGold.Length; i++)
+            {
+                if (tempBetGold[i] > 0)
+                    GlobalManager.Instance.gold += tempBetGold[i];
+            }
+            GlobalManager.Instance.betGold = new float[6];
 
+            UIManager.Instance.StarInit();
+            UIManager.Instance.ShowGold(GlobalManager.Instance.gold);
         }
     }
     IEnumerator cor_GameStart()
@@ -88,7 +97,6 @@ public class GameManager : MonoSingleton<GameManager>
 
                 UIManager.Instance.StarOn(num);
 
-                isGaming = false;
                 break;
             }
             yield return null;
@@ -101,7 +109,8 @@ public class GameManager : MonoSingleton<GameManager>
             _x[num[i]]++;
         }
         yield return new WaitForSeconds(1);
-        UIManager.Instance.GetBetTablePopup(GlobalManager.Instance.betGold, _x);
+        UIManager.Instance.ShowBetTablePopup(GlobalManager.Instance.betGold, _x);
+        isGaming = false;
 
     }
 }

@@ -8,6 +8,9 @@ public class UIManager : MonoSingleton<UIManager>
     public Button startBtn;
     public Button resetBtn;
     public Button[] numBtn;
+
+    public Text goldText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,9 @@ public class UIManager : MonoSingleton<UIManager>
     }
     public void GetBetsPopup(eDiceNum _num, Color32 _color)
     {
+        if (GameManager.Instance.isGaming == true)
+            return;
+
         GameObject objUI = UITools.Instance.ShowUI(eUIType.PF_UI_BETS);
         UIBets popup = objUI.GetComponent<UIBets>();
         popup.Init(() =>
@@ -53,8 +59,13 @@ public class UIManager : MonoSingleton<UIManager>
         numBtn[_num[2]].transform.Find("Star").gameObject.SetActive(true);
     }
 
+    public void ShowGold(float _gold)
+    {
+        goldText.text = GlobalManager.Instance.GetGold2Unit(_gold);
+    }
+
     // 결과 팝업
-    public void GetBetTablePopup(int[] _bet, int[] _x)
+    public void ShowBetTablePopup(float[] _bet, int[] _x)
     {
         GameObject objUI = UITools.Instance.ShowUI(eUIType.PF_UI_BET_TABLE);
         UIBetTable popup = objUI.GetComponent<UIBetTable>();

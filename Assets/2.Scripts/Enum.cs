@@ -33,3 +33,14 @@ public enum eDiceNum
     FIVE,
     SIX
 }
+
+public enum eGoldUnit
+{
+    NONE,
+    K,      // 킬로
+    M,      // 메가
+    G,      // 기가
+    T,      // 테라
+    P,      // 페타
+    E       // 엑사
+}

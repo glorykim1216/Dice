@@ -41,7 +41,7 @@ public class UIBets : MonoBehaviour
     public Button ButtonOK;
     public Text titleText;
     public Text goldText;
-    public int betGold;
+    public float betGold;
     public Slider slider;
 
     eDiceNum num;
@@ -62,8 +62,8 @@ public class UIBets : MonoBehaviour
     }
     void valueChanged()
     {
-        betGold = (int)(slider.value * GlobalManager.Instance.gold);
-        goldText.text = betGold.ToString();
+        betGold = slider.value * GlobalManager.Instance.gold;
+        goldText.text = betGold.ToString("N0");
     }
     public void BtnOK()
     {
@@ -71,6 +71,7 @@ public class UIBets : MonoBehaviour
         {
             GlobalManager.Instance.gold -= betGold;     // - 값 예외 처리 필요
             GlobalManager.Instance.betGold[(int)num] = betGold;
+            UIManager.Instance.ShowGold(GlobalManager.Instance.gold);
             Debug.Log(GlobalManager.Instance.gold);
             ButtonOK.onClick.RemoveAllListeners();
             Yes();

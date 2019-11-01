@@ -1459,7 +1459,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 31, y: 0}
+  m_AnchoredPosition: {x: -40, y: 0}
   m_SizeDelta: {x: 160, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &398677932
@@ -1489,7 +1489,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 3
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -3799,6 +3799,7 @@ MonoBehaviour:
   - {fileID: 161155857}
   - {fileID: 967067222}
   - {fileID: 803248301}
+  isGaming: 0
 --- !u!4 &1304648999
 Transform:
   m_ObjectHideFlags: 0
@@ -4152,6 +4153,7 @@ MonoBehaviour:
   - {fileID: 412172405}
   - {fileID: 272454856}
   - {fileID: 1300267035}
+  goldText: {fileID: 398677932}
 --- !u!4 &1535422751
 Transform:
   m_ObjectHideFlags: 0
@@ -4529,7 +4531,7 @@ GameObject:
   - component: {fileID: 1693006781}
   - component: {fileID: 1693006780}
   m_Layer: 5
-  m_Name: Coin
+  m_Name: Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4553,7 +4555,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 314, y: 502}
+  m_AnchoredPosition: {x: 311, y: 506}
   m_SizeDelta: {x: 150, y: 41.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1693006780

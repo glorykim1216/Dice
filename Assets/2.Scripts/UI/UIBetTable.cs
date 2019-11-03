@@ -22,7 +22,7 @@ public class UIBetTable : MonoBehaviour
         Yes = _yes;
 
         ButtonOK.onClick.AddListener(() => { BtnOK(); });
-
+        prizeGold = 0;
         for (int i = 0; i < _bet.Length; i++)
         {
             betText[i].text = GlobalManager.Instance.GetGold2Unit(_bet[i]);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GlobalManager : MonoSingleton<GlobalManager>
 {
-    public float gold = 5899000430;
+    public float gold = 77777;
     public float[] betGold = new float[6];
 
     public string GetGold2Unit(float _gold)

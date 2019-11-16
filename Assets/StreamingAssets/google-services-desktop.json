@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "729972444206",
+    "firebase_url": "https://color-dice.firebaseio.com",
+    "project_id": "color-dice",
+    "storage_bucket": "color-dice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729972444206:android:38047d305def4d4c5123bf",
+        "android_client_info": {
+          "package_name": "com.pistachio.dice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729972444206-i3hsvh4ffraotokbofmi570t6bo05qi4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pistachio.dice",
+            "certificate_hash": "708fe09e173644468b4fefc0748ff24c8de3e1bf"
+          }
+        },
+        {
+          "client_id": "729972444206-3q9s2is9o45dfd1v3esh7mp6l8pglj2s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWoXg7pVfRAF46UBFh_FDtYPbPeN2F4r8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "729972444206-3q9s2is9o45dfd1v3esh7mp6l8pglj2s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

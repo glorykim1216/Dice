@@ -13,14 +13,24 @@ public class UIBetTable : MonoBehaviour
     public Text[] betText;
     public Text[] xText;
     public Text[] winText;
+    public Text TotalPrizeGold;
+    public Text rewardMultipleText;
 
     float prizeGold; // 상금
+    int rewardMultiple; // 보상형 광고 배율
 
-    public void Init(YesEvent _yes, float[] _bet, int[] _x)
+    public void Init(YesEvent _yes, float[] _bet, int[] _x, int _rewardMultiple)
     {
         // 이벤트 전달
         Yes = _yes;
+        rewardMultiple = _rewardMultiple;
 
+        if (rewardMultiple > 1)
+            rewardMultipleText.text = "X " + rewardMultiple.ToString();
+        else
+            rewardMultipleText.text = "";
+
+        ButtonOK.onClick.RemoveAllListeners();
         ButtonOK.onClick.AddListener(() => { BtnOK(); });
         prizeGold = 0;
         for (int i = 0; i < _bet.Length; i++)
@@ -38,13 +48,14 @@ public class UIBetTable : MonoBehaviour
                 prizeGold += win;
                 winText[i].text = GlobalManager.Instance.GetGold2Unit(win);
             }
-            else if(_x[i] == 2)
+            else if (_x[i] == 2)
             {
                 float win = _bet[i] * 3;
                 prizeGold += win;
                 winText[i].text = GlobalManager.Instance.GetGold2Unit(win);
             }
         }
+        TotalPrizeGold.text = GlobalManager.Instance.GetGold2Unit(prizeGold);
     }
 
     public void BtnOK()
@@ -53,10 +64,9 @@ public class UIBetTable : MonoBehaviour
         {
             GlobalManager.Instance.betGold = new float[6];
 
-            GlobalManager.Instance.gold += prizeGold;
+            GlobalManager.Instance.gold += (prizeGold * rewardMultiple);
             UIManager.Instance.ShowGold(GlobalManager.Instance.gold);
             Debug.Log(GlobalManager.Instance.gold);
-            ButtonOK.onClick.RemoveAllListeners();
 
 
             Yes();

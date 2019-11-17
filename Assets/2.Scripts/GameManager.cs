@@ -8,14 +8,17 @@ public class GameManager : MonoSingleton<GameManager>
     public Transform[] dices;
 
     private Vector3[] resetPos = {
-        new Vector3(-3.5f, 22.01f, 23.53f),
-        new Vector3(0f, 22.01f, 23.53f),
-        new Vector3(3.14f, 22.01f, 23.53f)
+        new Vector3(-3.5f, 22.06f, 23.53f),
+        new Vector3(0f, 22.06f, 23.53f),
+        new Vector3(3.14f, 22.06f, 23.53f)
     };
 
     int[] num = new int[3];
     public bool isGaming = false;
     bool isReady = true;
+
+    public override void Init() { }
+
     void Start()
     {
         GameReset();
@@ -31,7 +34,7 @@ public class GameManager : MonoSingleton<GameManager>
             StartCoroutine("cor_GameStart");
         }
     }
-    public void GameReset()
+    public bool GameReset()
     {
         if (isGaming == false)
         {
@@ -45,7 +48,7 @@ public class GameManager : MonoSingleton<GameManager>
                 int posX = Random.Range(-1, 3);
                 dices[i].position = resetPos[i] + new Vector3((float)posX * 0.1f, 0, 0); ;
                 dices[i].rotation = Quaternion.Euler(new Vector3(randomX * 90 + 30, 0, randomY * 90));
-                dices[i].GetComponent<Rigidbody>().isKinematic = true;
+                //dices[i].GetComponent<Rigidbody>().isKinematic = true;
             }
             float[] tempBetGold = GlobalManager.Instance.betGold;
             for (int i = 0; i < tempBetGold.Length; i++)
@@ -57,7 +60,10 @@ public class GameManager : MonoSingleton<GameManager>
 
             UIManager.Instance.StarInit();
             UIManager.Instance.ShowGold(GlobalManager.Instance.gold);
+
+            return isGaming;
         }
+        return isGaming;
     }
     IEnumerator cor_GameStart()
     {
@@ -67,7 +73,7 @@ public class GameManager : MonoSingleton<GameManager>
         for (int i = 0; i < count; i++)
         {
             rigid[i] = dices[i].GetComponent<Rigidbody>();
-            rigid[i].isKinematic = false;
+            //rigid[i].isKinematic = false;
         }
 
         float angle = 0;
@@ -109,7 +115,7 @@ public class GameManager : MonoSingleton<GameManager>
             _x[num[i]]++;
         }
         yield return new WaitForSeconds(1);
-        UIManager.Instance.ShowBetTablePopup(GlobalManager.Instance.betGold, _x);
+        UIManager.Instance.ShowBetTablePopup(GlobalManager.Instance.betGold, _x, GlobalManager.Instance.rewardMultiple);
         isGaming = false;
 
     }

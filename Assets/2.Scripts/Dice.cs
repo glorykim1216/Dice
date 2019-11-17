@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// 주사위
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

@@ -9,6 +9,8 @@ public class UITools : MonoSingleton<UITools>
     Dictionary<eUIType, GameObject> DicUI = new Dictionary<eUIType, GameObject>();
     Transform ui;
 
+    public override void Init() { }
+
     // UI 생성 및 가져오기
     private GameObject GetUI(eUIType _uiType)
     {

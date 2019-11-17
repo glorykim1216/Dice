@@ -51,6 +51,7 @@ public class UIBets : MonoBehaviour
         // 이벤트 전달
         Yes = _yes;
 
+        ButtonOK.onClick.RemoveAllListeners();
         ButtonOK.onClick.AddListener(() => { BtnOK(); });
 
         num = _num;
@@ -73,7 +74,6 @@ public class UIBets : MonoBehaviour
             GlobalManager.Instance.betGold[(int)num] += betGold;
             UIManager.Instance.ShowGold(GlobalManager.Instance.gold);
             Debug.Log(GlobalManager.Instance.gold);
-            ButtonOK.onClick.RemoveAllListeners();
             Yes();
         }
     }

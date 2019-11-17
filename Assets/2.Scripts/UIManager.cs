@@ -2,22 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoSingleton<UIManager>
 {
+    public Button backBtn;
     public Button startBtn;
     public Button resetBtn;
     public Button[] numBtn;
 
     public Text goldText;
 
+    public Text rewardMultipleText;
+    public int rewardMultiple;
+
+    public override void Init() { }
+
     // Start is called before the first frame update
     void Start()
     {
-        Screen.SetResolution(720, 1280, true);
-
+        backBtn.onClick.AddListener(() => { SceneManager.LoadScene("Main"); });
         startBtn.onClick.AddListener(() => { GameManager.Instance.GameStart(); });
-        resetBtn.onClick.AddListener(() => { GameManager.Instance.GameReset(); });
+        resetBtn.onClick.AddListener(() =>
+        {
+            bool isGaming = GameManager.Instance.GameReset();
+
+            int random = Random.Range(0, 3); // 1/3 확률로 보상광고
+            if (isGaming == false && random == 0)
+            {
+                rewardMultiple = Random.Range(2, 7);     // 2~6 배
+                ShowRewardMultiplePopup(rewardMultiple);
+            }
+        });
 
         // 버튼 연결
         numBtn[0].onClick.AddListener(() => { GetBetsPopup(eDiceNum.ONE, new Color32(0, 255, 0, 255)); });
@@ -65,17 +81,43 @@ public class UIManager : MonoSingleton<UIManager>
     }
 
     // 결과 팝업
-    public void ShowBetTablePopup(float[] _bet, int[] _x)
+    public void ShowBetTablePopup(float[] _bet, int[] _x, int _rewardMultiple)
     {
         GameObject objUI = UITools.Instance.ShowUI(eUIType.PF_UI_BET_TABLE);
         UIBetTable popup = objUI.GetComponent<UIBetTable>();
-        popup.Init(() =>
-        {
-            UITools.Instance.HideUI(eUIType.PF_UI_BET_TABLE);
-            Debug.Log("OK");
-        },
+        popup.Init(
+            () =>
+            {
+                UITools.Instance.HideUI(eUIType.PF_UI_BET_TABLE);
+
+                GlobalManager.Instance.InitRewardMultiple();
+
+                int random = Random.Range(0, 2);    // 1/2 확률로 전면광고
+                if (random == 0)
+                    AdmobScreenAd.Instance.ShowScreenAd();  
+
+            },
             _bet,
-            _x
+            _x,
+            _rewardMultiple
         );
     }
+    public void ShowRewardMultiplePopup(int _rewardMultiple)
+    {
+        GameObject objUI = UITools.Instance.ShowUI(eUIType.PF_UI_REWARD_AD);
+        UIRewardAd popup = objUI.GetComponent<UIRewardAd>();
+        popup.Init(
+            () =>
+            {
+                UITools.Instance.HideUI(eUIType.PF_UI_REWARD_AD);
+                AdmobReward.Instance.ShowRewardAd();
+            },
+            () =>
+            {
+                UITools.Instance.HideUI(eUIType.PF_UI_REWARD_AD);
+            },
+            _rewardMultiple
+        );
+    }
+
 }

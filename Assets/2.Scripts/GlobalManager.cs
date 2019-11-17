@@ -6,7 +6,15 @@ public class GlobalManager : MonoSingleton<GlobalManager>
 {
     public float gold = 77777;
     public float[] betGold = new float[6];
+    public int rewardMultiple = 1;
 
+    private void Start()
+    {
+        AdmobBanner.Instance.Init();
+        AdmobScreenAd.Instance.Init();
+        AdmobReward.Instance.Init();
+    }
+    public void startGame() { }
     public string GetGold2Unit(float _gold)
     {
         string resultStr = string.Empty;
@@ -39,5 +47,17 @@ public class GlobalManager : MonoSingleton<GlobalManager>
                 return resultStr;
             }
         }
+    }
+
+    public void RewardAdCompleted()
+    {
+        rewardMultiple = UIManager.Instance.rewardMultiple;
+        UIManager.Instance.rewardMultipleText.text = "Gold X " + rewardMultiple;
+    }
+
+    public void InitRewardMultiple()
+    {
+        rewardMultiple = 1;
+        UIManager.Instance.rewardMultipleText.text = "";
     }
 }

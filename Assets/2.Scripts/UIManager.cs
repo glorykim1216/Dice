@@ -94,8 +94,9 @@ public class UIManager : MonoSingleton<UIManager>
 
                 int random = Random.Range(0, 2);    // 1/2 확률로 전면광고
                 if (random == 0)
-                    AdmobScreenAd.Instance.ShowScreenAd();  
+                    AdmobScreenAd.Instance.ShowScreenAd();
 
+                GlobalManager.Instance.DatabaseSave();
             },
             _bet,
             _x,

@@ -8,11 +8,18 @@ public class GlobalManager : MonoSingleton<GlobalManager>
     public float[] betGold = new float[6];
     public int rewardMultiple = 1;
 
+    private bool isDBLoad = false;
+
     private void Start()
     {
         AdmobBanner.Instance.Init();
         AdmobScreenAd.Instance.Init();
         AdmobReward.Instance.Init();
+
+        isDBLoad = DatabaseManager.Instance.Load();
+        gold = DatabaseManager.Instance.ItemList.gold;
+        //gold = 700;
+        
     }
     public void startGame() { }
     public string GetGold2Unit(float _gold)
@@ -59,5 +66,12 @@ public class GlobalManager : MonoSingleton<GlobalManager>
     {
         rewardMultiple = 1;
         UIManager.Instance.rewardMultipleText.text = "";
+    }
+
+    // DB 저장
+    public void DatabaseSave()
+    {
+        if (isDBLoad)
+            DatabaseManager.Instance.UpdateItemTable((int)gold);
     }
 }

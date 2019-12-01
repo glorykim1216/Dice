@@ -8,21 +8,26 @@ public class UIManager : MonoSingleton<UIManager>
 {
     public Button backBtn;
     public Button startBtn;
+    public Button tableBtn;
     public Button resetBtn;
     public Button[] numBtn;
 
     public Text goldText;
+    public Text getGoldText;
+    public Text timeText;
 
     public Text rewardMultipleText;
     public int rewardMultiple;
 
+    private int timeBonus = 200;
+
     public override void Init() { }
 
-    // Start is called before the first frame update
     void Start()
     {
         backBtn.onClick.AddListener(() => { SceneManager.LoadScene("Main"); });
         startBtn.onClick.AddListener(() => { GameManager.Instance.GameStart(); });
+        tableBtn.onClick.AddListener(() => { ShowBetTablePopup(); });
         resetBtn.onClick.AddListener(() =>
         {
             bool isGaming = GameManager.Instance.GameReset();
@@ -43,6 +48,18 @@ public class UIManager : MonoSingleton<UIManager>
         numBtn[4].onClick.AddListener(() => { GetBetsPopup(eDiceNum.FIVE, new Color32(60, 190, 220, 255)); });
         numBtn[5].onClick.AddListener(() => { GetBetsPopup(eDiceNum.SIX, new Color32(255, 150, 50, 255)); });
 
+    }
+    private void Update()
+    {
+        float time = GlobalManager.Instance.time;
+        if (time < 1)
+        {
+            GlobalManager.Instance.time = 60;
+            ShowGetGold("+" + timeBonus);
+            GlobalManager.Instance.gold += timeBonus;
+            GlobalManager.Instance.DatabaseSave();
+        }
+        timeText.text = "Bonus:00:" + string.Format("{0:D2}", (int)time);
     }
     public void GetBetsPopup(eDiceNum _num, Color32 _color)
     {
@@ -75,13 +92,12 @@ public class UIManager : MonoSingleton<UIManager>
         numBtn[_num[2]].transform.Find("Star").gameObject.SetActive(true);
     }
 
-    public void ShowGold(float _gold)
+    public void ShowTotalGold(float _gold)
     {
         goldText.text = GlobalManager.Instance.GetGold2Unit(_gold);
     }
-
-    // 결과 팝업
-    public void ShowBetTablePopup(float[] _bet, int[] _x, int _rewardMultiple)
+    // 테이블확인 팝업
+    public void ShowBetTablePopup()
     {
         GameObject objUI = UITools.Instance.ShowUI(eUIType.PF_UI_BET_TABLE);
         UIBetTable popup = objUI.GetComponent<UIBetTable>();
@@ -89,14 +105,27 @@ public class UIManager : MonoSingleton<UIManager>
             () =>
             {
                 UITools.Instance.HideUI(eUIType.PF_UI_BET_TABLE);
+            },
+            GlobalManager.Instance.betGold
+        );
+    }
+    // 결과 팝업
+    public void ShowResultBetTablePopupㄲ(float[] _bet, int[] _x, int _rewardMultiple)
+    {
+        GameObject objUI = UITools.Instance.ShowUI(eUIType.PF_UI_BET_TABLE);
+        UIBetTable popup = objUI.GetComponent<UIBetTable>();
+        popup.Init(
+            () =>
+            {
+                GlobalManager.Instance.betGold = new float[6];
+
+                UITools.Instance.HideUI(eUIType.PF_UI_BET_TABLE);
 
                 GlobalManager.Instance.InitRewardMultiple();
 
                 int random = Random.Range(0, 2);    // 1/2 확률로 전면광고
                 if (random == 0)
                     AdmobScreenAd.Instance.ShowScreenAd();
-
-                GlobalManager.Instance.DatabaseSave();
             },
             _bet,
             _x,
@@ -120,5 +149,38 @@ public class UIManager : MonoSingleton<UIManager>
             _rewardMultiple
         );
     }
+    public void ShowGetGold(string _showGold)
+    {
+        StartCoroutine(cor_GetGoldShow(_showGold));
+    }
+    IEnumerator cor_GetGoldShow(string _showGold)
+    {
+        getGoldText.text = _showGold;
+        getGoldText.gameObject.SetActive(true);
+        RectTransform rectTransform = getGoldText.GetComponent<RectTransform>();
+
+        float alphaTime = 0;
+        float alpha = 0;
+        Color textUIColor = getGoldText.color;
+        yield return new WaitForSeconds(0.3f);
+        while (alphaTime <= 1.0f)
+        {
+            alphaTime += Time.deltaTime;
+            alpha = Mathf.Lerp(1.0f, 0.0f, alphaTime);
+
+            textUIColor.a = alpha;
+            getGoldText.color = textUIColor;
+
+            rectTransform.localPosition = new Vector3(-40, alphaTime * 35, 0);
+            yield return null;
+
+        }
+        getGoldText.gameObject.SetActive(false);
+
+        rectTransform.localPosition = new Vector3(-40, 0, 0);
+        textUIColor.a = 1;
+        getGoldText.color = textUIColor;
+    }
+
 
 }

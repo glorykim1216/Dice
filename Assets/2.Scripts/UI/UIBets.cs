@@ -72,7 +72,7 @@ public class UIBets : MonoBehaviour
         {
             GlobalManager.Instance.gold -= betGold;     // - 값 예외 처리 필요
             GlobalManager.Instance.betGold[(int)num] += betGold;
-            UIManager.Instance.ShowGold(GlobalManager.Instance.gold);
+            UIManager.Instance.ShowTotalGold(GlobalManager.Instance.gold);
             Debug.Log(GlobalManager.Instance.gold);
             Yes();
         }

@@ -22,7 +22,7 @@ public class GameManager : MonoSingleton<GameManager>
     void Start()
     {
         GameReset();
-        UIManager.Instance.ShowGold(GlobalManager.Instance.gold);
+        UIManager.Instance.ShowTotalGold(GlobalManager.Instance.gold);
     }
 
     public void GameStart()
@@ -59,7 +59,7 @@ public class GameManager : MonoSingleton<GameManager>
             GlobalManager.Instance.betGold = new float[6];
 
             UIManager.Instance.StarInit();
-            UIManager.Instance.ShowGold(GlobalManager.Instance.gold);
+            UIManager.Instance.ShowTotalGold(GlobalManager.Instance.gold);
 
             return isGaming;
         }
@@ -115,7 +115,7 @@ public class GameManager : MonoSingleton<GameManager>
             _x[num[i]]++;
         }
         yield return new WaitForSeconds(1);
-        UIManager.Instance.ShowBetTablePopup(GlobalManager.Instance.betGold, _x, GlobalManager.Instance.rewardMultiple);
+        UIManager.Instance.ShowResultBetTablePopupㄲ(GlobalManager.Instance.betGold, _x, GlobalManager.Instance.rewardMultiple);
         isGaming = false;
 
     }

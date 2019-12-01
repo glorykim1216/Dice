@@ -10,6 +10,8 @@ public class GlobalManager : MonoSingleton<GlobalManager>
 
     private bool isDBLoad = false;
 
+    public float time = 0;
+
     private void Start()
     {
         AdmobBanner.Instance.Init();
@@ -19,7 +21,12 @@ public class GlobalManager : MonoSingleton<GlobalManager>
         isDBLoad = DatabaseManager.Instance.Load();
         gold = DatabaseManager.Instance.ItemList.gold;
         //gold = 700;
-        
+
+    }
+    private void Update()
+    {
+        if (time > 0)
+            time -= Time.deltaTime;
     }
     public void startGame() { }
     public string GetGold2Unit(float _gold)

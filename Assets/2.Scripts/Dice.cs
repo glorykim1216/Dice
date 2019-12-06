@@ -29,4 +29,10 @@ public class Dice : MonoBehaviour
         }
         return result;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (this.transform.tag.Equals("Dice1") && GameManager.Instance.isGaming == true)
+            Vibration.Instance.Vibrate(10);
+    }
 }

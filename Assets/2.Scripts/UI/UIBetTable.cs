@@ -106,7 +106,7 @@ public class UIBetTable : MonoBehaviour
                 UIManager.Instance.ShowTotalGold(GlobalManager.Instance.gold);
                 GlobalManager.Instance.DatabaseSave();
 
-                Debug.Log(GlobalManager.Instance.gold);
+                //Debug.Log(GlobalManager.Instance.gold);
             }
             Yes();
         }

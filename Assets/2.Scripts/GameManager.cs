@@ -6,6 +6,7 @@ public class GameManager : MonoSingleton<GameManager>
 {
     public Transform trigger;
     public Transform[] dices;
+    private Rigidbody[] rigid;
 
     private Vector3[] resetPos = {
         new Vector3(-3.5f, 22.06f, 23.53f),
@@ -23,6 +24,14 @@ public class GameManager : MonoSingleton<GameManager>
     {
         GameReset();
         UIManager.Instance.ShowTotalGold(GlobalManager.Instance.gold);
+
+        rigid = new Rigidbody[dices.Length];
+
+        for (int i = 0; i < dices.Length; i++)
+        {
+            rigid[i] = dices[i].GetComponent<Rigidbody>();
+            //rigid[i].isKinematic = false;
+        }
     }
 
     public void GameStart()
@@ -68,13 +77,7 @@ public class GameManager : MonoSingleton<GameManager>
     IEnumerator cor_GameStart()
     {
         int count = dices.Length;
-        Rigidbody[] rigid = new Rigidbody[count];
         int[] velocityZero = new int[count];
-        for (int i = 0; i < count; i++)
-        {
-            rigid[i] = dices[i].GetComponent<Rigidbody>();
-            //rigid[i].isKinematic = false;
-        }
 
         float angle = 0;
         while (angle < 110)
@@ -115,7 +118,7 @@ public class GameManager : MonoSingleton<GameManager>
             _x[num[i]]++;
         }
         yield return new WaitForSeconds(1);
-        UIManager.Instance.ShowResultBetTablePopupㄲ(GlobalManager.Instance.betGold, _x, GlobalManager.Instance.rewardMultiple);
+        UIManager.Instance.ShowResultBetTablePopup(GlobalManager.Instance.betGold, _x, GlobalManager.Instance.rewardMultiple);
         isGaming = false;
 
     }

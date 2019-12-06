@@ -71,7 +71,7 @@ public class UIManager : MonoSingleton<UIManager>
         popup.Init(() =>
             {
                 UITools.Instance.HideUI(eUIType.PF_UI_BETS);
-                Debug.Log("OK");
+                //Debug.Log("OK");
             },
             _num,
             _color
@@ -110,7 +110,7 @@ public class UIManager : MonoSingleton<UIManager>
         );
     }
     // 결과 팝업
-    public void ShowResultBetTablePopupㄲ(float[] _bet, int[] _x, int _rewardMultiple)
+    public void ShowResultBetTablePopup(float[] _bet, int[] _x, int _rewardMultiple)
     {
         GameObject objUI = UITools.Instance.ShowUI(eUIType.PF_UI_BET_TABLE);
         UIBetTable popup = objUI.GetComponent<UIBetTable>();

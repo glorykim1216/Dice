@@ -5,7 +5,7 @@ using GoogleMobileAds.Api;
 
 public class AdmobReward : MonoSingleton<AdmobReward>
 {
-    private readonly string unitID = "ca-app-pub-3940256099942544/5224354917";
+    private readonly string unitID = "ca-app-pub-9055428279697909/8418781383";
     private readonly string test_unitID = "ca-app-pub-3940256099942544/5224354917";
 
     private RewardBasedVideoAd rewardAd;

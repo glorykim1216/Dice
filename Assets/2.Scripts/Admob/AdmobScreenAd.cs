@@ -4,7 +4,7 @@ using UnityEngine;
 using GoogleMobileAds.Api;
 public class AdmobScreenAd : MonoSingleton<AdmobScreenAd>
 {
-    private readonly string unitID = "ca-app-pub-3940256099942544/1033173712";
+    private readonly string unitID = "ca-app-pub-9055428279697909/4721889580";
     private readonly string test_unitID = "ca-app-pub-3940256099942544/1033173712";
 
     private InterstitialAd screenAd;

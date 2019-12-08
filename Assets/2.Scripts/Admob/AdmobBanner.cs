@@ -5,7 +5,7 @@ using GoogleMobileAds.Api;
 
 public class AdmobBanner : MonoSingleton<AdmobBanner>
 {
-    private readonly string unitID = "ca-app-pub-3940256099942544/6300978111";
+    private readonly string unitID = "ca-app-pub-9055428279697909/8980203955";
     private readonly string test_unitID = "ca-app-pub-3940256099942544/6300978111";
 
     private BannerView banner;

@@ -120,7 +120,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.0
+  bundleVersion: 1.1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -161,7 +161,7 @@ PlayerSettings:
     tvOS: com.Company.ProductName
   buildNumber:
     iOS: 
-  AndroidBundleVersionCode: 1
+  AndroidBundleVersionCode: 2
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -247,7 +247,7 @@ PlayerSettings:
   clonedFromGUID: 3ca1b85bd22a8c949a4c7ea1ed9c369e
   templatePackageId: 
   templateDefaultScene: 
-  AndroidTargetArchitectures: 1
+  AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: "D:/\uB9AC\uC18C\uC2A4\uAD00\uB9AC/\uB2E4\uC774\uC2A4/pistachio.keystore"
@@ -622,6 +622,7 @@ PlayerSettings:
   platformArchitecture:
     iOS: 2
   scriptingBackend:
+    Android: 1
     Metro: 2
     WP8: 2
     WebGL: 1
